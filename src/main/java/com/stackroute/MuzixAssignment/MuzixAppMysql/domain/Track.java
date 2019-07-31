@@ -60,6 +60,8 @@ import javax.persistence.*;
 @Builder
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
+
+//Track class has created variables, setters , getters, constructors, toString()
 public class Track {
 
     @Id
