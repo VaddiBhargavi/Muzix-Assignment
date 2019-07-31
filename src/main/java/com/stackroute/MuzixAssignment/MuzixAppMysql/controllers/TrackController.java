@@ -19,13 +19,16 @@ import java.util.List;
 @ControllerAdvice(basePackages = "com.stackroute.muzixapp")
 public class TrackController {
 
+    //Controller has a dependency on Service class and created a reference
     TrackService trackService;
-
+    
+//Parameterized constructor
     public TrackController(TrackService trackService)
     {
         this.trackService = trackService;
     }
 
+    //saveTrack method which is used to store the tracks that are inserted
         @PostMapping("track")
     public ResponseEntity<?> saveTrack(@RequestBody Track track) {
         ResponseEntity responseEntity;
@@ -38,6 +41,7 @@ public class TrackController {
         return responseEntity;
     }
 
+    //saveAllTrack used to store all the tracks
     @PostMapping("alltracks")
     public ResponseEntity<?> saveAllTrack(@RequestBody List<Track> trackList) throws TrackAlreadyExistsException
     {
@@ -49,12 +53,14 @@ public class TrackController {
         return new ResponseEntity<List<Track>>(savedTrackList, HttpStatus.CREATED);
     }
 
+    //getTrackByName method is to get the tracks based on name
     @GetMapping("trackByName")
     public ResponseEntity<?> getTrackByName(@RequestParam String name) throws TrackNotFoundException
     {
         return new ResponseEntity<List<Track>>(trackService.getTracksByName(name), HttpStatus.OK);
     }
-
+    
+    //getAllTracks method is to get all the tracks that are inserted
     @GetMapping("track")
     public ResponseEntity<?> getAllTracks() {
         ResponseEntity responseEntity;
@@ -70,6 +76,7 @@ public class TrackController {
         return responseEntity;
     }
 
+    //updateTrack method is to update any track 
      @PutMapping("track/{id}")
     public ResponseEntity<?> updateTrack(@RequestBody Track track, @PathVariable int id) {
          ResponseEntity responseEntity;
@@ -82,6 +89,7 @@ public class TrackController {
          return responseEntity;
      }
 
+    //deleteTrack is to delete any existing track
       @DeleteMapping("track/{id}")
     public ResponseEntity<?> deleteTrack(@PathVariable int id) {
         ResponseEntity responseEntity;
@@ -94,6 +102,7 @@ public class TrackController {
         return responseEntity;
     }
 
+    //searchTrack method is to search for any track
         @GetMapping("searchTracks")
     public ResponseEntity<?> searchTracks(@RequestParam("searchString") String searchString)
     {
